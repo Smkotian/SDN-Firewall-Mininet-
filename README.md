@@ -206,6 +206,8 @@ This ensures efficient handling of repeated traffic while preventing stale rules
 
   * No response (100% packet loss)
   * Each packet triggers a PacketIn event (no flow rule installed for drop)
+  * <img width="681" height="401" alt="01_pox_installation_and_startup" src="https://github.com/user-attachments/assets/a43e5f31-912b-4b5a-855a-647a9fc5604a" />
+
 
 ---
 
