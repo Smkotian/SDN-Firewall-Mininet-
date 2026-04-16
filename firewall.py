@@ -1,13 +1,9 @@
-from pox.core import core  
-# Import POX core module (main controller framework)
+from pox.core import core  # Import POX core module (main controller framework)
 
-import pox.openflow.libopenflow_01 as of  
-# Import OpenFlow 1.0 library to communicate with switches
+import pox.openflow.libopenflow_01 as of  # Import OpenFlow 1.0 library to communicate with switches
 
 
-log = core.getLogger()  
-# Create a logger object to print messages in the POX console
-
+log = core.getLogger()  # Create a logger object to print messages in the POX console
 
 mac_to_port = {}  
 # Dictionary to store mapping: MAC address → switch port
@@ -18,8 +14,7 @@ def _handle_ConnectionUp(event):
     """
     Triggered when a switch connects to the controller.
     """
-    log.info("Switch connected: %s", event.connection)  
-    # Log that a switch has connected (event.connection = switch object)
+    log.info("Switch connected: %s", event.connection)  # Log that a switch has connected (event.connection = switch object)
 
 
 def _handle_PacketIn(event):
@@ -28,22 +23,18 @@ def _handle_PacketIn(event):
     flow rule exists. The packet is sent to the controller.
     """
 
-    packet = event.parsed  
-    # Extract the parsed packet object from the event
+    packet = event.parsed # Extract the parsed packet object from the event
 
     # Ignore incomplete or malformed packets
     if not packet.parsed:
         return  
 
-    in_port = event.port  
-    # Get the port number on which the packet arrived at the switch
+    in_port = event.port  # Get the port number on which the packet arrived at the switch
 
-    # Learn the source MAC address and map it to the incoming port
-    mac_to_port[packet.src] = in_port  
+    mac_to_port[packet.src] = in_port   # Learn the source MAC address and map it to the incoming port
     # Example: "MAC A is reachable via port 1"
 
-    # Try to extract an IPv4 packet from the Ethernet frame
-    ip_packet = packet.find('ipv4')  
+    ip_packet = packet.find('ipv4')   # Try to extract an IPv4 packet from the Ethernet frame
 
 
     # ---------------- FIREWALL LOGIC ----------------
